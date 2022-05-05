@@ -182,17 +182,19 @@
       - name: Create VMs via Libvirt
         include_tasks: tasks/libvirt_create_vms.yaml
       become: yes
-      when: hypervisor == "kvm"
       tags:
         - create_libvirt_cluster
+      when: hypervisor == "kvm"
 
-    - name: Create VMs via vSphere
+    - name: Create vSphere Infrastructure
+      block:
+      - name: Create VMs via vSphere
         include_tasks: tasks/vmware_create_vms.yaml
       become: yes
-      when: hypervisor == "vmware"
       tags:
-        - create_vmware_cluster
-      
+        - create_libvirt_cluster
+      when: hypervisor == "vmware"
+
     - name: Wait for hosts to report into the Assisted Installer service
       include_tasks: tasks/ai_svc_check_for_hosts.yaml
 
