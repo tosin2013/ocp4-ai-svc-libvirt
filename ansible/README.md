@@ -47,7 +47,7 @@ sudo dnf install -y jq git curl wget virt-install virt-viewer
 ### [One-time] Installing Pip modules
 ```
 sudo subscription-manager repos --enable ansible-2.9-for-rhel-8-x86_64-rpms
-sudo dnf install ansible python3 -y
+sudo dnf install jq ansible python3 -y
 ```
 
 Some of the Ansible Modules require additional Python Pip modules - install the following:

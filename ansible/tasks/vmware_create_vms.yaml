@@ -38,12 +38,6 @@
     folder_type: vm
     state: present
 
-- name: Download Discovery ISO
-  get_url:
-    url: "{{ isoDownloadURL }}"
-    dest: "/tmp/discovery-iso-{{ cluster_name }}.iso"
-    validate_certs: false
-
 - name: Delete the previous iso if present
   community.vmware.vsphere_file:
     host: '{{ vcenter_fqdn }}'
@@ -52,7 +46,7 @@
     validate_certs: "{{ (skip_ssl_validation == 'true') | ternary('false', 'true') }}"
     datacenter: "{{ vsphere_datacenter }}"
     datastore: "{{ vsphere_datastore }}"
-    path: "ISOs/discovery-iso-{{ cluster_name }}.iso"
+    path: "ISOs/ocp_ai.iso"
     state: absent
   ignore_errors: true
 
@@ -62,16 +56,11 @@
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
     validate_certs: "{{ (skip_ssl_validation == 'true') | ternary('false', 'true') }}"
-    src: "/tmp/discovery-iso-{{ cluster_name }}.iso"
+    src: "{{ generated_asset_directory }}/{{ cluster_id }}/ocp_ai.iso"
     datacenter: "{{ vsphere_datacenter }}"
     datastore: "{{ vsphere_datastore }}"
-    path: "ISOs/discovery-iso-{{ cluster_name }}.iso"
+    path: "ISOs/ocp_ai.iso"
   ignore_errors: true
-
-- name: Delete local Discovery ISO
-  file:
-    path: "/tmp/discovery-iso-{{ cluster_name }}.iso"
-    state: absent
 
 - name: Set empty facts
   set_fact:

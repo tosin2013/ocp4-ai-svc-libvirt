@@ -155,6 +155,7 @@
             src: "{{ generated_asset_directory }}/{{ cluster_id }}/ocp_ai.iso"
             dest: "{{ libvirt_base_iso_path }}/ocp_ai-{{ cluster_id }}.iso"
           become: yes
+          when: hypervisor == "kvm"
 
     - name: Set core user password
       block:      
