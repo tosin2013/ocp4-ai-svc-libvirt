@@ -209,7 +209,7 @@
         include_tasks: tasks/vmware_create_vms.yaml
       become: yes
       tags:
-        - create_libvirt_cluster
+        - create_vmware_cluster
       when: hypervisor == "vmware"
 
     - name: Wait for hosts to report into the Assisted Installer service
