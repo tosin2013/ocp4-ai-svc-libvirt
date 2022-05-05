@@ -182,8 +182,16 @@
       - name: Create VMs via Libvirt
         include_tasks: tasks/libvirt_create_vms.yaml
       become: yes
+      when: hypervisor == "kvm"
       tags:
         - create_libvirt_cluster
+
+    - name: Create VMs via vSphere
+        include_tasks: tasks/vmware_create_vms.yaml
+      become: yes
+      when: hypervisor == "vmware"
+      tags:
+        - create_vmware_cluster
       
     - name: Wait for hosts to report into the Assisted Installer service
       include_tasks: tasks/ai_svc_check_for_hosts.yaml
@@ -227,7 +235,7 @@
           task_vm_names: "{{ vm_names }}"
           task_shutdown_vms: "{{ shutdown_vms }}"
       become: yes
-      when: libvirt_watch_for_vm_restart|bool
+      when: libvirt_watch_for_vm_restart|bool and hypervisor == "kvm"
 
     - name: Wait for the cluster to be fully installed
       include_tasks: tasks/ai_svc_check_cluster_install_finished.yaml
