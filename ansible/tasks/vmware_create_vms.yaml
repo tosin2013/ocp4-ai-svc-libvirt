@@ -12,10 +12,6 @@
     msg: "Cannot connect to vCenter at {{ vcenter_fqdn }}!"
   when: vcenter_test_info.datacenter_info | length == 0
 
-- name: Unmarshal the Cluster ConfigMap
-  set_fact:
-    cluster_nodes: "{{ cluster_nodes | from_json }}"
-
 - name: Create the ISOs directory on the datacenter/datastore
   community.vmware.vsphere_file:
     host: '{{ vcenter_fqdn }}'

@@ -1,4 +1,4 @@
-# Configure System
+# Qubinode Deployments
 
 Downlaod and extract the qubinode-installer as a non root user.
 
