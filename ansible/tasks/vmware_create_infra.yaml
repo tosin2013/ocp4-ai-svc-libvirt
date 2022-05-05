@@ -43,3 +43,9 @@
       type: iso
       iso_path: "[{{ vsphere_datastore }}] ISOs/ocp_ai.iso"
     networks: "{{ networks }}"
+
+- name: Resetting Facts
+  set_fact:
+    networks: []
+    disks: []
+    agent_names: []
