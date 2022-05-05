@@ -67,4 +67,4 @@
   loop: "{{ cluster_nodes }}"
   loop_control:
     loop_var: node_item
-  include_tasks: create_vmware_infra.yml
+  include_tasks: vmware_create_vmware_infra.yml
