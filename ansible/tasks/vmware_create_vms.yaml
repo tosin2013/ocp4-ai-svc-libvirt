@@ -58,13 +58,8 @@
     path: "ISOs/ocp_ai.iso"
   ignore_errors: true
 
-- name: Set empty facts
-  set_fact:
-    agent_names: []
-    approved_agents: []
-
 - name: Process VMs
   loop: "{{ cluster_nodes }}"
   loop_control:
     loop_var: node_item
-  include_tasks: vmware_create_vmware_infra.yml
+  include: vmware_create_infra.yaml
