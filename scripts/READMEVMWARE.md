@@ -6,6 +6,9 @@ $ cd scipts
 $ ./gozones.sh
 ```
 
+
+date +%s | md5sum | head -c 6 | sed -e 's/\([0-9A-Fa-f]\{2\}\)/\1:/g' -e 's/\(.*\):$/\1/' | sed -e 's/^/00:50:56:/'
+
 ### Create Ansible Vault
 ```
 $ cd ansible 
@@ -22,7 +25,6 @@ skip_ssl_validation: true
 vsphere_datacenter: "Datacenter"
 vsphere_cluster: Cluster
 vsphere_datastore: "Datastore"
-vsphere_network: "VM Network"
 ```
 
 ### Create pull secret and api token
